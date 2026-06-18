@@ -5,7 +5,9 @@ import { Next } from '../lib/protobuf/response/next_pb'
 import { Search } from '../lib/protobuf/response/search_pb'
 import { Shorts } from '../lib/protobuf/response/shorts_pb'
 import { Guide } from '../lib/protobuf/response/guide_pb'
+import { Player, PictureInPictureSupportedRenderer, BackgroundSupportedRenderer, TranslationLanguage, CaptionTrack } from '../lib/protobuf/response/player_pb'
 import { Setting, SubSetting, SettingItem } from '../lib/protobuf/response/setting_pb'
+import { Watch } from '../lib/protobuf/response/watch_pb'
 
 import { YouTubeMessage } from './youtube'
 import { $ } from '../lib/env'
@@ -106,6 +108,114 @@ export class NextMessage extends BrowseMessage {
   }
 }
 
+export class PlayerMessage extends YouTubeMessage {
+  constructor (msgType: any = Player, name: string = 'Player') {
+    super(msgType, name)
+  }
+
+  pure (): this {
+    if (this.message.adPlacements?.length) {
+      this.message.adPlacements.length = 0
+    }
+    if (this.message.adSlots?.length) {
+      this.message.adSlots.length = 0
+    }
+    delete this.message?.playbackTracking?.pageadViewthroughconversion
+    this.addPremiumAbility()
+    this.addTranslateCaption()
+    this.needProcess = true
+    return this
+  }
+
+  addPremiumAbility (): void {
+    if (typeof this.message.playabilityStatus === 'object') {
+      this.message.playabilityStatus.pictureInPictureRender = new PictureInPictureSupportedRenderer({
+        pictureInPictureAbility: {
+          active: true,
+          f4: 0,
+          f6: 0,
+          f8: 1
+        }
+      })
+      this.message.playabilityStatus.backgroundPlayerRender = new BackgroundSupportedRenderer({
+        backgroundAbility: {
+          active: true
+        }
+      })
+    }
+  }
+
+  addTranslateCaption (): void {
+    const captionTargetLang = this.argument.captionLang as string
+    if (captionTargetLang === 'off') return
+
+    this.iterate(this.message, 'captionTracks', (obj, stack) => {
+      const captionTracks = obj.captionTracks
+      const audioTracks = obj.audioTracks
+
+      if (Array.isArray(captionTracks)) {
+        const captionPriority = {
+          [captionTargetLang]: 2,
+          en: 1
+        }
+        let priority = -1
+        let targetIndex = 0
+
+        for (let i = 0; i < captionTracks.length; i++) {
+          const captionTrack = captionTracks[i]
+          const currentPriority = captionPriority[captionTrack.languageCode]
+          if (currentPriority && (currentPriority > priority)) {
+            priority = currentPriority
+            targetIndex = i
+          }
+          captionTrack.isTranslatable = true
+        }
+
+        if (priority !== 2) {
+          const newCaption = new CaptionTrack({
+            baseUrl: captionTracks[targetIndex].baseUrl + `&tlang=${captionTargetLang}`,
+            name: { runs: [{ text: `@Enhance (${captionTargetLang})` }] },
+            vssId: `.${captionTargetLang}`,
+            languageCode: captionTargetLang
+          })
+          captionTracks.push(newCaption)
+        }
+
+        if (Array.isArray(audioTracks)) {
+          const trackIndex = priority === 2 ? targetIndex : captionTracks.length - 1
+          for (const audioTrack of audioTracks) {
+            if (!audioTrack.captionTrackIndices?.includes(trackIndex)) {
+              audioTrack.captionTrackIndices.push(trackIndex)
+            }
+            audioTrack.defaultCaptionTrackIndex = trackIndex
+            audioTrack.captionsInitialState = 3
+          }
+        }
+      }
+
+      const languages = {
+        de: 'Deutsch',
+        ru: 'Русский',
+        fr: 'Français',
+        fil: 'Filipino',
+        ko: '한국어',
+        ja: '日本語',
+        en: 'English',
+        vi: 'Tiếng Việt',
+        'zh-Hant': '中文（繁體）',
+        'zh-Hans': '中文（简体）',
+        und: '@VirgilClyne'
+      }
+      obj.translationLanguages =
+        Object.entries(languages).map(([k, v]) => new TranslationLanguage({
+          languageCode: k,
+          languageName: { runs: [{ text: v }] }
+        }))
+      stack.length = 0
+    })
+  }
+}
+
 export class SearchMessage extends BrowseMessage {
   constructor (msgType: any = Search, name: string = 'Search') {
     super(msgType, name)
@@ -201,6 +311,32 @@ export class SettingMessage extends YouTubeMessage {
     })
     this.message.settingItems.push(fakePlayBackgroundSetting)
     this.needProcess = true
+    return this
+  }
+}
+
+export class WatchMessage extends YouTubeMessage {
+  player: PlayerMessage
+  next: NextMessage
+
+  constructor (msgType: any = Watch, name: string = 'Watch') {
+    super(msgType, name)
+    this.player = new PlayerMessage()
+    this.next = new NextMessage()
+  }
+
+  async pure (): Promise<this> {
+    for (const content of this.message.contents) {
+      if (content.player) {
+        this.player.message = content.player
+        this.player.pure()
+      }
+      if (content.next) {
+        this.next.message = content.next
+        await this.next.pure()
+      }
+      this.needProcess = true
+    }
     return this
   }
 }
