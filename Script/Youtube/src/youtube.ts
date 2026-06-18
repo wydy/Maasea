@@ -6,7 +6,7 @@ export abstract class YouTubeMessage {
   needProcess: boolean
   needSave: boolean
   message: any
-  version = '1.1'
+  version = '1.0'
   whiteNo: number[]
   blackNo: number[]
   whiteEml: string[]
