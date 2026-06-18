@@ -5,8 +5,9 @@ import { Next } from '../lib/protobuf/response/next_pb'
 import { Search } from '../lib/protobuf/response/search_pb'
 import { Shorts } from '../lib/protobuf/response/shorts_pb'
 import { Guide } from '../lib/protobuf/response/guide_pb'
-import { Player, BackgroundPlayer, TranslationLanguage, CaptionTrack } from '../lib/protobuf/response/player_pb'
+import { Player, PictureInPictureSupportedRenderer, BackgroundSupportedRenderer, TranslationLanguage, CaptionTrack } from '../lib/protobuf/response/player_pb'
 import { Setting, SubSetting, SettingItem } from '../lib/protobuf/response/setting_pb'
+import { Watch } from '../lib/protobuf/response/watch_pb'
 
 import { YouTubeMessage } from './youtube'
 import { $ } from '../lib/env'
@@ -18,11 +19,15 @@ export class BrowseMessage extends YouTubeMessage {
   }
 
   async pure (): Promise<this> {
-    this.iterate(this.message, 'richGridContents', (obj) => {
-      for (let i = obj.richGridContents.length - 1; i >= 0; i--) {
-        this.removeCommonAD(obj, i)
-        this.removeShorts(obj, i)
+    this.iterate(this.message, 'richItemContents', (obj) => {
+      if (!Array.isArray(obj.richItemContents)) return false
+      for (let i = obj.richItemContents.length - 1; i >= 0; i--) {
+        if (this.isAdvertise(obj.richItemContents[i])) {
+          obj.richItemContents.splice(i, 1)
+          this.needProcess = true
+        }
       }
+      return false
     })
     await this.translate()
     return this
@@ -52,8 +57,9 @@ export class BrowseMessage extends YouTubeMessage {
     this.iterate(this.message?.responseContext, 'key', (obj, stack) => {
       if (obj.key === 'browse_id') {
         browseId = obj.value
-        stack.length = 0
+        return true
       }
+      return false
     })
     return browseId
   }
@@ -68,14 +74,14 @@ export class BrowseMessage extends YouTubeMessage {
       tempObj = obj.timedLyricsContent
       lyric = obj.timedLyricsContent.runs.map((item) => item.text).join('\n')
       flag = true
-      stack.length = 0
+      return true
     })
     if (!flag) {
       this.iterate(this.message, 'description', (obj, stack) => {
         tempObj = obj.description.runs[0]
         lyric = obj.description.runs[0].text
-        stack.length = 0
         flag = true
+        return true
       })
     }
     if (!flag) return
@@ -149,26 +155,31 @@ export class PlayerMessage extends YouTubeMessage {
   }
 
   pure (): this {
-    // 去除广告
     if (this.message.adPlacements?.length) {
       this.message.adPlacements.length = 0
     }
-    this.addPlayAbility()
+    if (this.message.adSlots?.length) {
+      this.message.adSlots.length = 0
+    }
+    delete this.message?.playbackTracking?.pageadViewthroughconversion
+    this.addPremiumAbility()
     this.addTranslateCaption()
     this.needProcess = true
     return this
   }
 
-  addPlayAbility (): void {
-    // 开启画中画
-    const miniPlayerRender = this.message?.playabilityStatus?.miniPlayer?.miniPlayerRender
-    if (typeof miniPlayerRender === 'object') {
-      miniPlayerRender.active = true
-    }
-    // 开启后台播放
+  addPremiumAbility (): void {
     if (typeof this.message.playabilityStatus === 'object') {
-      this.message.playabilityStatus.backgroundPlayer = new BackgroundPlayer({
-        backgroundPlayerRender: {
+      this.message.playabilityStatus.pictureInPictureRender = new PictureInPictureSupportedRenderer({
+        pictureInPictureAbility: {
+          active: true,
+          f4: 0,
+          f6: 0,
+          f8: 1
+        }
+      })
+      this.message.playabilityStatus.backgroundPlayerRender = new BackgroundSupportedRenderer({
+        backgroundAbility: {
           active: true
         }
       })
@@ -282,7 +293,8 @@ export class GuideMessage extends YouTubeMessage {
   pure (): this {
     const blackList = ['SPunlimited']
     if (this.argument.blockUpload) blackList.push('FEuploads')
-    if (this.argument.immersive) blackList.push('FEmusic_immersive')
+    if (this.argument.blockImmersive) blackList.push('FEmusic_immersive')
+    if (this.argument.blockShorts) blackList.push('FEshorts')
     this.iterate(this.message, 'rendererItems', (obj) => {
       for (let i = obj.rendererItems.length - 1; i >= 0; i--) {
         const browseId =
@@ -304,68 +316,71 @@ export class SettingMessage extends YouTubeMessage {
   }
 
   pure (): this {
-    // 增加 PIP
-    this.iterate(this.message, 'categoryId', (obj) => {
-      if (obj.categoryId === 10005) {
-        const trackingParams = {
-          f1: 135,
-          f2: 20434,
-          f3: 2,
-          timeInfo: this.message.trackingParams.timeInfo
-        }
+    this.iterate(this.message.settingItems, 'categoryId', (obj) => {
+      if (obj.categoryId === 10135) {
         const fakePIPSetting = new SubSetting({
           settingBooleanRenderer: {
             itemId: 0,
             enableServiceEndpoint: {
-              trackingParams,
               setClientSettingEndpoint: {
-                settingDatas: {
+                settingData: {
                   clientSettingEnum: { item: 151 },
                   boolValue: true
                 }
               }
             },
             disableServiceEndpoint: {
-              trackingParams,
               setClientSettingEndpoint: {
-                settingDatas: {
+                settingData: {
                   clientSettingEnum: { item: 151 },
                   boolValue: false
                 }
               }
-            },
-            clickTrackingParams: trackingParams
+            }
           }
         })
-
         obj.subSettings.push(fakePIPSetting)
       }
+      return false
     })
-    // 增加后台播放
+
     const fakePlayBackgroundSetting = new SettingItem({
-      settingCategoryEntryRenderer: {
-        f2: 1,
-        f3: 1,
-        trackingParams: {
-          f1: 2,
-          f2: 20020,
-          f3: 8,
-          timeInfo: this.message.trackingParams.timeInfo
-        },
-        f6: 0,
-        f7: 1,
-        f8: 1,
-        f9: 1,
-        f10: 1,
-        f12: 1
+      backgroundPlayBackSettingRenderer: {
+        backgroundPlayback: true,
+        download: true,
+        downloadQualitySelection: true,
+        smartDownload: true,
+        icon: { iconType: 1093 }
       }
     })
-    // deep copy
     this.message.settingItems.push(fakePlayBackgroundSetting)
-    // fakeF88478200.st2F88478200.st3F5.f1 = 1
-    // fakeF88478200.st2F88478200.st3F5.f3 = 9
-    // this.message.st1F7 = fakeF88478200
     this.needProcess = true
+    return this
+  }
+}
+
+export class WatchMessage extends YouTubeMessage {
+  player: PlayerMessage
+  next: NextMessage
+
+  constructor (msgType: any = Watch, name: string = 'Watch') {
+    super(msgType, name)
+    this.player = new PlayerMessage()
+    this.next = new NextMessage()
+  }
+
+  async pure (): Promise<this> {
+    for (const content of this.message.contents) {
+      if (content.player) {
+        this.player.message = content.player
+        this.player.pure()
+      }
+      if (content.next) {
+        this.next.message = content.next
+        await this.next.pure()
+      }
+      this.needProcess = true
+    }
     return this
   }
 }

@@ -3,7 +3,9 @@ package youtube.response.player;
 
 message Player {
   repeated AdPlacement adPlacements = 7;
+  repeated AdSlot adSlots = 68;
   PlayabilityStatus playabilityStatus = 2;
+  PlaybackTracking playbackTracking = 9;
   Captions captions = 10 [json_name = "captions"];
 }
 message AdPlacement {
@@ -13,20 +15,41 @@ message AdPlacementRenderer {
   string params = 4;
 }
 message PlayabilityStatus{
-  MiniPlayer miniPlayer = 21;
-  BackgroundPlayer backgroundPlayer = 11;
+  PictureInPictureSupportedRenderer pictureInPictureRender = 21;
+  BackgroundSupportedRenderer backgroundPlayerRender = 11;
 }
-message MiniPlayer{
-  MiniPlayerRender miniPlayerRender = 151635310;
+
+message PictureInPictureSupportedRenderer{
+  PictureInPictureAbility pictureInPictureAbility = 151635310;
 }
-message  BackgroundPlayer{
-  BackgroundPlayerRender backgroundPlayerRender = 64657230;
+message BackgroundSupportedRenderer{
+  BackgroundAbility backgroundAbility = 64657230;
 }
-message MiniPlayerRender{
+message PictureInPictureAbility{
+  bool active = 1;
+  int32 f4 = 4;
+  int32 f6 = 6;
+  int32 f8 = 8;
+}
+message BackgroundAbility {
   bool active = 1;
 }
-message BackgroundPlayerRender {
-  bool active = 1;
+message PlaybackTracking {
+  Url videostatsPlaybackUrl = 1;
+  Url videostatsDelayplayUrl = 2;
+  Url videostatsWatchtimeUrl = 3;
+  Url ptrackingUrl = 4;
+  Url qoeUrl = 5;
+  Url atrUrl = 13;
+  Url videostatsEngageUrl = 15;
+  Url pageadViewthroughconversion = 18;
+}
+message Url {
+  string baseUrl = 1 [json_name = "baseUrl"];
+}
+message AdSlot {
+  message Render {}
+  Render render = 424701016;
 }
 message Captions {
   PlayerCaptionsTrackListRenderer playerCaptionsTrackListRenderer = 51621377 [json_name = "playerCaptionsTracklistRenderer"];

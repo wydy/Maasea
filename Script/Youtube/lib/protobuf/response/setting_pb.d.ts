@@ -16,6 +16,11 @@ export declare class Setting extends Message<Setting> {
   settingItems: SettingItem[];
 
   /**
+   * @generated from field: repeated youtube.response.setting.SettingItem collectionItems = 7;
+   */
+  collectionItems: SettingItem[];
+
+  /**
    *  St1F7 st1F7 = 7;
    *
    * @generated from field: youtube.response.setting.TrackingParams trackingParams = 10;
@@ -42,9 +47,9 @@ export declare class Setting extends Message<Setting> {
  */
 export declare class SettingItem extends Message<SettingItem> {
   /**
-   * @generated from field: youtube.response.setting.SettingCategoryEntryRenderer settingCategoryEntryRenderer = 88478200;
+   * @generated from field: youtube.response.setting.BackgroundPlayBackSettingRenderer backgroundPlayBackSettingRenderer = 88478200;
    */
-  settingCategoryEntryRenderer?: SettingCategoryEntryRenderer;
+  backgroundPlayBackSettingRenderer?: BackgroundPlayBackSettingRenderer;
 
   /**
    * @generated from field: youtube.response.setting.SettingCategoryCollectionRenderer settingCategoryCollectionRenderer = 66930374;
@@ -333,9 +338,9 @@ export declare class ServiceEndpoint extends Message<ServiceEndpoint> {
  */
 export declare class SetClientSettingEndpoint extends Message<SetClientSettingEndpoint> {
   /**
-   * @generated from field: youtube.response.setting.SettingDatas settingDatas = 1;
+   * @generated from field: youtube.response.setting.SettingDatas settingData = 1;
    */
-  settingDatas?: SettingDatas;
+  settingData?: SettingDatas;
 
   constructor(data?: PartialMessage<SetClientSettingEndpoint>);
 
@@ -403,5 +408,131 @@ export declare class ClientSettingEnum extends Message<ClientSettingEnum> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClientSettingEnum;
 
   static equals(a: ClientSettingEnum | PlainMessage<ClientSettingEnum> | undefined, b: ClientSettingEnum | PlainMessage<ClientSettingEnum> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.setting.BackgroundPlayBackSettingRenderer
+ */
+export declare class BackgroundPlayBackSettingRenderer extends Message<BackgroundPlayBackSettingRenderer> {
+  /**
+   * @generated from field: youtube.response.setting.Label name = 1;
+   */
+  name?: Label;
+
+  /**
+   * @generated from field: bool backgroundPlayback = 2;
+   */
+  backgroundPlayback: boolean;
+
+  /**
+   * @generated from field: bool download = 3;
+   */
+  download: boolean;
+
+  /**
+   * @generated from field: bytes trackingParams = 5;
+   */
+  trackingParams: Uint8Array;
+
+  /**
+   * @generated from field: bool downloadQualitySelection = 9;
+   */
+  downloadQualitySelection: boolean;
+
+  /**
+   * @generated from field: bool smartDownload = 10;
+   */
+  smartDownload: boolean;
+
+  /**
+   * @generated from field: youtube.response.setting.Icon icon = 14;
+   */
+  icon?: Icon;
+
+  constructor(data?: PartialMessage<BackgroundPlayBackSettingRenderer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.setting.BackgroundPlayBackSettingRenderer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BackgroundPlayBackSettingRenderer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BackgroundPlayBackSettingRenderer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BackgroundPlayBackSettingRenderer;
+
+  static equals(a: BackgroundPlayBackSettingRenderer | PlainMessage<BackgroundPlayBackSettingRenderer> | undefined, b: BackgroundPlayBackSettingRenderer | PlainMessage<BackgroundPlayBackSettingRenderer> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.setting.Label
+ */
+export declare class Label extends Message<Label> {
+  /**
+   * @generated from field: repeated youtube.response.setting.Run runs = 1;
+   */
+  runs: Run[];
+
+  constructor(data?: PartialMessage<Label>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.setting.Label";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Label;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Label;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Label;
+
+  static equals(a: Label | PlainMessage<Label> | undefined, b: Label | PlainMessage<Label> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.setting.Run
+ */
+export declare class Run extends Message<Run> {
+  /**
+   * @generated from field: string text = 1;
+   */
+  text: string;
+
+  constructor(data?: PartialMessage<Run>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.setting.Run";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Run;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Run;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Run;
+
+  static equals(a: Run | PlainMessage<Run> | undefined, b: Run | PlainMessage<Run> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.setting.Icon
+ */
+export declare class Icon extends Message<Icon> {
+  /**
+   * @generated from field: int32 iconType = 1;
+   */
+  iconType: number;
+
+  constructor(data?: PartialMessage<Icon>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.setting.Icon";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Icon;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Icon;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Icon;
+
+  static equals(a: Icon | PlainMessage<Icon> | undefined, b: Icon | PlainMessage<Icon> | undefined): boolean;
 }
 

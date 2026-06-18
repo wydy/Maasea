@@ -16,9 +16,19 @@ export declare class Player extends Message<Player> {
   adPlacements: AdPlacement[];
 
   /**
+   * @generated from field: repeated youtube.response.player.AdSlot adSlots = 68;
+   */
+  adSlots: AdSlot[];
+
+  /**
    * @generated from field: youtube.response.player.PlayabilityStatus playabilityStatus = 2;
    */
   playabilityStatus?: PlayabilityStatus;
+
+  /**
+   * @generated from field: youtube.response.player.PlaybackTracking playbackTracking = 9;
+   */
+  playbackTracking?: PlaybackTracking;
 
   /**
    * @generated from field: youtube.response.player.Captions captions = 10;
@@ -93,14 +103,14 @@ export declare class AdPlacementRenderer extends Message<AdPlacementRenderer> {
  */
 export declare class PlayabilityStatus extends Message<PlayabilityStatus> {
   /**
-   * @generated from field: youtube.response.player.MiniPlayer miniPlayer = 21;
+   * @generated from field: youtube.response.player.PictureInPictureSupportedRenderer pictureInPictureRender = 21;
    */
-  miniPlayer?: MiniPlayer;
+  pictureInPictureRender?: PictureInPictureSupportedRenderer;
 
   /**
-   * @generated from field: youtube.response.player.BackgroundPlayer backgroundPlayer = 11;
+   * @generated from field: youtube.response.player.BackgroundSupportedRenderer backgroundPlayerRender = 11;
    */
-  backgroundPlayer?: BackgroundPlayer;
+  backgroundPlayerRender?: BackgroundSupportedRenderer;
 
   constructor(data?: PartialMessage<PlayabilityStatus>);
 
@@ -118,99 +128,240 @@ export declare class PlayabilityStatus extends Message<PlayabilityStatus> {
 }
 
 /**
- * @generated from message youtube.response.player.MiniPlayer
+ * @generated from message youtube.response.player.PictureInPictureSupportedRenderer
  */
-export declare class MiniPlayer extends Message<MiniPlayer> {
+export declare class PictureInPictureSupportedRenderer extends Message<PictureInPictureSupportedRenderer> {
   /**
-   * @generated from field: youtube.response.player.MiniPlayerRender miniPlayerRender = 151635310;
+   * @generated from field: youtube.response.player.PictureInPictureAbility pictureInPictureAbility = 151635310;
    */
-  miniPlayerRender?: MiniPlayerRender;
+  pictureInPictureAbility?: PictureInPictureAbility;
 
-  constructor(data?: PartialMessage<MiniPlayer>);
+  constructor(data?: PartialMessage<PictureInPictureSupportedRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.player.MiniPlayer";
+  static readonly typeName = "youtube.response.player.PictureInPictureSupportedRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MiniPlayer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PictureInPictureSupportedRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MiniPlayer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PictureInPictureSupportedRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MiniPlayer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PictureInPictureSupportedRenderer;
 
-  static equals(a: MiniPlayer | PlainMessage<MiniPlayer> | undefined, b: MiniPlayer | PlainMessage<MiniPlayer> | undefined): boolean;
+  static equals(a: PictureInPictureSupportedRenderer | PlainMessage<PictureInPictureSupportedRenderer> | undefined, b: PictureInPictureSupportedRenderer | PlainMessage<PictureInPictureSupportedRenderer> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.player.BackgroundPlayer
+ * @generated from message youtube.response.player.BackgroundSupportedRenderer
  */
-export declare class BackgroundPlayer extends Message<BackgroundPlayer> {
+export declare class BackgroundSupportedRenderer extends Message<BackgroundSupportedRenderer> {
   /**
-   * @generated from field: youtube.response.player.BackgroundPlayerRender backgroundPlayerRender = 64657230;
+   * @generated from field: youtube.response.player.BackgroundAbility backgroundAbility = 64657230;
    */
-  backgroundPlayerRender?: BackgroundPlayerRender;
+  backgroundAbility?: BackgroundAbility;
 
-  constructor(data?: PartialMessage<BackgroundPlayer>);
+  constructor(data?: PartialMessage<BackgroundSupportedRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.player.BackgroundPlayer";
+  static readonly typeName = "youtube.response.player.BackgroundSupportedRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BackgroundPlayer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BackgroundSupportedRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BackgroundPlayer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BackgroundSupportedRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BackgroundPlayer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BackgroundSupportedRenderer;
 
-  static equals(a: BackgroundPlayer | PlainMessage<BackgroundPlayer> | undefined, b: BackgroundPlayer | PlainMessage<BackgroundPlayer> | undefined): boolean;
+  static equals(a: BackgroundSupportedRenderer | PlainMessage<BackgroundSupportedRenderer> | undefined, b: BackgroundSupportedRenderer | PlainMessage<BackgroundSupportedRenderer> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.player.MiniPlayerRender
+ * @generated from message youtube.response.player.PictureInPictureAbility
  */
-export declare class MiniPlayerRender extends Message<MiniPlayerRender> {
+export declare class PictureInPictureAbility extends Message<PictureInPictureAbility> {
   /**
    * @generated from field: bool active = 1;
    */
   active: boolean;
 
-  constructor(data?: PartialMessage<MiniPlayerRender>);
+  /**
+   * @generated from field: int32 f4 = 4;
+   */
+  f4: number;
+
+  /**
+   * @generated from field: int32 f6 = 6;
+   */
+  f6: number;
+
+  /**
+   * @generated from field: int32 f8 = 8;
+   */
+  f8: number;
+
+  constructor(data?: PartialMessage<PictureInPictureAbility>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.player.MiniPlayerRender";
+  static readonly typeName = "youtube.response.player.PictureInPictureAbility";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MiniPlayerRender;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PictureInPictureAbility;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MiniPlayerRender;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PictureInPictureAbility;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MiniPlayerRender;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PictureInPictureAbility;
 
-  static equals(a: MiniPlayerRender | PlainMessage<MiniPlayerRender> | undefined, b: MiniPlayerRender | PlainMessage<MiniPlayerRender> | undefined): boolean;
+  static equals(a: PictureInPictureAbility | PlainMessage<PictureInPictureAbility> | undefined, b: PictureInPictureAbility | PlainMessage<PictureInPictureAbility> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.player.BackgroundPlayerRender
+ * @generated from message youtube.response.player.BackgroundAbility
  */
-export declare class BackgroundPlayerRender extends Message<BackgroundPlayerRender> {
+export declare class BackgroundAbility extends Message<BackgroundAbility> {
   /**
    * @generated from field: bool active = 1;
    */
   active: boolean;
 
-  constructor(data?: PartialMessage<BackgroundPlayerRender>);
+  constructor(data?: PartialMessage<BackgroundAbility>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.player.BackgroundPlayerRender";
+  static readonly typeName = "youtube.response.player.BackgroundAbility";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BackgroundPlayerRender;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BackgroundAbility;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BackgroundPlayerRender;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BackgroundAbility;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BackgroundPlayerRender;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BackgroundAbility;
 
-  static equals(a: BackgroundPlayerRender | PlainMessage<BackgroundPlayerRender> | undefined, b: BackgroundPlayerRender | PlainMessage<BackgroundPlayerRender> | undefined): boolean;
+  static equals(a: BackgroundAbility | PlainMessage<BackgroundAbility> | undefined, b: BackgroundAbility | PlainMessage<BackgroundAbility> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.player.PlaybackTracking
+ */
+export declare class PlaybackTracking extends Message<PlaybackTracking> {
+  /**
+   * @generated from field: youtube.response.player.Url videostatsPlaybackUrl = 1;
+   */
+  videostatsPlaybackUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url videostatsDelayplayUrl = 2;
+   */
+  videostatsDelayplayUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url videostatsWatchtimeUrl = 3;
+   */
+  videostatsWatchtimeUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url ptrackingUrl = 4;
+   */
+  ptrackingUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url qoeUrl = 5;
+   */
+  qoeUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url atrUrl = 13;
+   */
+  atrUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url videostatsEngageUrl = 15;
+   */
+  videostatsEngageUrl?: Url;
+
+  /**
+   * @generated from field: youtube.response.player.Url pageadViewthroughconversion = 18;
+   */
+  pageadViewthroughconversion?: Url;
+
+  constructor(data?: PartialMessage<PlaybackTracking>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.player.PlaybackTracking";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PlaybackTracking;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PlaybackTracking;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PlaybackTracking;
+
+  static equals(a: PlaybackTracking | PlainMessage<PlaybackTracking> | undefined, b: PlaybackTracking | PlainMessage<PlaybackTracking> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.player.Url
+ */
+export declare class Url extends Message<Url> {
+  /**
+   * @generated from field: string baseUrl = 1;
+   */
+  baseUrl: string;
+
+  constructor(data?: PartialMessage<Url>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.player.Url";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Url;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Url;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Url;
+
+  static equals(a: Url | PlainMessage<Url> | undefined, b: Url | PlainMessage<Url> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.player.AdSlot
+ */
+export declare class AdSlot extends Message<AdSlot> {
+  /**
+   * @generated from field: youtube.response.player.AdSlot.Render render = 424701016;
+   */
+  render?: AdSlot_Render;
+
+  constructor(data?: PartialMessage<AdSlot>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.player.AdSlot";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AdSlot;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AdSlot;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AdSlot;
+
+  static equals(a: AdSlot | PlainMessage<AdSlot> | undefined, b: AdSlot | PlainMessage<AdSlot> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.player.AdSlot.Render
+ */
+export declare class AdSlot_Render extends Message<AdSlot_Render> {
+  constructor(data?: PartialMessage<AdSlot_Render>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.player.AdSlot.Render";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AdSlot_Render;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AdSlot_Render;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AdSlot_Render;
+
+  static equals(a: AdSlot_Render | PlainMessage<AdSlot_Render> | undefined, b: AdSlot_Render | PlainMessage<AdSlot_Render> | undefined): boolean;
 }
 
 /**

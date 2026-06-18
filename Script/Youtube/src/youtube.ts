@@ -6,6 +6,7 @@ export abstract class YouTubeMessage {
   needProcess: boolean
   needSave: boolean
   message: any
+  version = '1.0'
   whiteNo: number[]
   blackNo: number[]
   whiteEml: string[]
@@ -21,23 +22,29 @@ export abstract class YouTubeMessage {
     $.log(name)
     this.name = name
     this.msgType = msgType
-    Object.assign(this, $.getJSON('YouTubeAdvertiseInfo', {
+    const config = $.getJSON('YouTubeAdvertiseInfo', {
+      version: this.version,
       whiteNo: [],
       blackNo: [],
       whiteEml: [],
-      blackEml: []
-    }))
+      blackEml: ['inline_injection_entrypoint_layout.eml']
+    }) as any
+    if (config.version === this.version) Object.assign(this, config)
     this.argument = this.decodeArgument()
   }
 
   decodeArgument (): Record<string, any> {
     const defaultArgument = {
-      lyricLang: 'zh-Hans',
-      captionLang: 'zh-Hans',
+      lyricLang: 'off',
+      captionLang: 'off',
       blockUpload: true,
-      immersive: true
+      blockImmersive: true,
+      blockShorts: false,
+      debug: false
     }
-    return typeof $argument === 'string' && !$argument.includes('{{{') ? JSON.parse($argument) : defaultArgument
+    return typeof $argument === 'string' && !$argument.includes('{{{')
+      ? Object.assign(defaultArgument, JSON.parse($argument))
+      : defaultArgument
   }
 
   fromBinary (binaryBody: Uint8Array): YouTubeMessage {
@@ -71,6 +78,7 @@ export abstract class YouTubeMessage {
     if (this.needSave) {
       $.log('Update Config')
       const YouTubeAdvertiseInfo = {
+        version: this.version,
         whiteNo: this.whiteNo,
         blackNo: this.blackNo,
         whiteEml: this.whiteEml,
@@ -100,11 +108,12 @@ export abstract class YouTubeMessage {
     this.save()
     if (this.needProcess) {
       $.done({ bodyBytes: this.toBinary() })
+    } else {
+      $.exit()
     }
-    $.exit()
   }
 
-  iterate (obj: any = {}, target: string | symbol, call: Function): any {
+  iterate (obj: any = {}, target: string | symbol, call: Function): boolean {
     const stack: any[] = (typeof obj === 'object') ? [obj] : []
     while (stack.length) {
       const item = stack.pop()
@@ -113,7 +122,7 @@ export abstract class YouTubeMessage {
       if (typeof target === 'symbol') {
         for (const s of Object.getOwnPropertySymbols(item)) {
           if (s.description === target.description) {
-            call(item, stack)
+            if (call(item, stack)) return true
             break
           }
         }
@@ -121,12 +130,13 @@ export abstract class YouTubeMessage {
 
       for (const key of keys) {
         if (key === target) {
-          call(item, stack)
+          if (call(item, stack)) return true
         } else if (typeof item[key] === 'object') {
           stack.push(item[key])
         }
       }
     }
+    return false
   }
 
   isAdvertise (o: Message<any>): boolean {
@@ -143,8 +153,7 @@ export abstract class YouTubeMessage {
       return true
     }
     // 包含 pagead 字符则判定为广告
-    const rawText = this.decoder.decode(field.data)
-    const adFlag = rawText.includes('pagead')
+    const adFlag = this.checkBufferIsAd(field)
     adFlag ? this.blackNo.push(no) : this.whiteNo.push(no)
     this.needSave = true
     return adFlag
@@ -162,9 +171,7 @@ export abstract class YouTubeMessage {
       } else {
         const videoContent = obj?.videoInfo?.videoContext?.videoContent
         if (videoContent) {
-          const unknownField = this.listUnknownFields(videoContent)[0]
-          const rawText = this.decoder.decode(unknownField.data)
-          adFlag = rawText.includes('pagead')
+          adFlag = this.checkUnknownFiled(videoContent)
           adFlag ? this.blackEml.push(eml) : this.whiteEml.push(eml)
           this.needSave = true
         }
@@ -181,5 +188,29 @@ export abstract class YouTubeMessage {
       stack.length = 0
     })
     return flag
+  }
+
+  checkBufferIsAd (field): boolean {
+    if (!field || field.data.length < 1000) return false
+    const data = field.data as Uint8Array
+    const pagead = [112, 97, 103, 101, 97, 100]
+    const last = data.length - pagead.length
+    for (let i = 0; i <= last; i++) {
+      if (
+        data[i] === pagead[0] &&
+        data[i + 1] === pagead[1] &&
+        data[i + 2] === pagead[2] &&
+        data[i + 3] === pagead[3] &&
+        data[i + 4] === pagead[4] &&
+        data[i + 5] === pagead[5]
+      ) {
+        return true
+      }
+    }
+    return false
+  }
+
+  checkUnknownFiled (field): boolean {
+    return field ? this.listUnknownFields(field)?.some((item) => this.checkBufferIsAd(item)) ?? false : false
   }
 }

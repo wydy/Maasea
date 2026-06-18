@@ -12,7 +12,9 @@ export const Player = proto3.makeMessageType(
   "youtube.response.player.Player",
   () => [
     { no: 7, name: "adPlacements", kind: "message", T: AdPlacement, repeated: true },
+    { no: 68, name: "adSlots", kind: "message", T: AdSlot, repeated: true },
     { no: 2, name: "playabilityStatus", kind: "message", T: PlayabilityStatus },
+    { no: 9, name: "playbackTracking", kind: "message", T: PlaybackTracking },
     { no: 10, name: "captions", kind: "message", T: Captions },
   ],
 );
@@ -43,49 +45,98 @@ export const AdPlacementRenderer = proto3.makeMessageType(
 export const PlayabilityStatus = proto3.makeMessageType(
   "youtube.response.player.PlayabilityStatus",
   () => [
-    { no: 21, name: "miniPlayer", kind: "message", T: MiniPlayer },
-    { no: 11, name: "backgroundPlayer", kind: "message", T: BackgroundPlayer },
+    { no: 21, name: "pictureInPictureRender", kind: "message", T: PictureInPictureSupportedRenderer },
+    { no: 11, name: "backgroundPlayerRender", kind: "message", T: BackgroundSupportedRenderer },
   ],
 );
 
 /**
- * @generated from message youtube.response.player.MiniPlayer
+ * @generated from message youtube.response.player.PictureInPictureSupportedRenderer
  */
-export const MiniPlayer = proto3.makeMessageType(
-  "youtube.response.player.MiniPlayer",
+export const PictureInPictureSupportedRenderer = proto3.makeMessageType(
+  "youtube.response.player.PictureInPictureSupportedRenderer",
   () => [
-    { no: 151635310, name: "miniPlayerRender", kind: "message", T: MiniPlayerRender },
+    { no: 151635310, name: "pictureInPictureAbility", kind: "message", T: PictureInPictureAbility },
   ],
 );
 
 /**
- * @generated from message youtube.response.player.BackgroundPlayer
+ * @generated from message youtube.response.player.BackgroundSupportedRenderer
  */
-export const BackgroundPlayer = proto3.makeMessageType(
-  "youtube.response.player.BackgroundPlayer",
+export const BackgroundSupportedRenderer = proto3.makeMessageType(
+  "youtube.response.player.BackgroundSupportedRenderer",
   () => [
-    { no: 64657230, name: "backgroundPlayerRender", kind: "message", T: BackgroundPlayerRender },
+    { no: 64657230, name: "backgroundAbility", kind: "message", T: BackgroundAbility },
   ],
 );
 
 /**
- * @generated from message youtube.response.player.MiniPlayerRender
+ * @generated from message youtube.response.player.PictureInPictureAbility
  */
-export const MiniPlayerRender = proto3.makeMessageType(
-  "youtube.response.player.MiniPlayerRender",
+export const PictureInPictureAbility = proto3.makeMessageType(
+  "youtube.response.player.PictureInPictureAbility",
+  () => [
+    { no: 1, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "f4", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 6, name: "f6", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 8, name: "f8", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.player.BackgroundAbility
+ */
+export const BackgroundAbility = proto3.makeMessageType(
+  "youtube.response.player.BackgroundAbility",
   () => [
     { no: 1, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
 /**
- * @generated from message youtube.response.player.BackgroundPlayerRender
+ * @generated from message youtube.response.player.PlaybackTracking
  */
-export const BackgroundPlayerRender = proto3.makeMessageType(
-  "youtube.response.player.BackgroundPlayerRender",
+export const PlaybackTracking = proto3.makeMessageType(
+  "youtube.response.player.PlaybackTracking",
   () => [
-    { no: 1, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 1, name: "videostatsPlaybackUrl", kind: "message", T: Url },
+    { no: 2, name: "videostatsDelayplayUrl", kind: "message", T: Url },
+    { no: 3, name: "videostatsWatchtimeUrl", kind: "message", T: Url },
+    { no: 4, name: "ptrackingUrl", kind: "message", T: Url },
+    { no: 5, name: "qoeUrl", kind: "message", T: Url },
+    { no: 13, name: "atrUrl", kind: "message", T: Url },
+    { no: 15, name: "videostatsEngageUrl", kind: "message", T: Url },
+    { no: 18, name: "pageadViewthroughconversion", kind: "message", T: Url },
   ],
+);
+
+/**
+ * @generated from message youtube.response.player.Url
+ */
+export const Url = proto3.makeMessageType(
+  "youtube.response.player.Url",
+  () => [
+    { no: 1, name: "baseUrl", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.player.AdSlot
+ */
+export const AdSlot = proto3.makeMessageType(
+  "youtube.response.player.AdSlot",
+  () => [
+    { no: 424701016, name: "render", kind: "message", T: AdSlot_Render },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.player.AdSlot.Render
+ */
+export const AdSlot_Render = proto3.makeMessageType(
+  "youtube.response.player.AdSlot.Render",
+  [],
+  {localName: "AdSlot_Render"},
 );
 
 /**

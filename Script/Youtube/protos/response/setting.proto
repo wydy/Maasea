@@ -3,12 +3,13 @@ package youtube.response.setting;
 
 message Setting{
   repeated SettingItem settingItems = 6;
+  repeated SettingItem collectionItems = 7;
   //  St1F7 st1F7 = 7;
   TrackingParams trackingParams = 10;
 }
 
 message SettingItem{
-  SettingCategoryEntryRenderer settingCategoryEntryRenderer = 88478200;
+  BackgroundPlayBackSettingRenderer backgroundPlayBackSettingRenderer = 88478200;
   SettingCategoryCollectionRenderer settingCategoryCollectionRenderer = 66930374;
 }
 //message  St1F7{
@@ -58,7 +59,7 @@ message ServiceEndpoint{
   SetClientSettingEndpoint setClientSettingEndpoint = 81212182;
 }
 message SetClientSettingEndpoint{
-  SettingDatas settingDatas = 1;
+  SettingDatas settingData = 1;
 }
 message SettingDatas{
   ClientSettingEnum clientSettingEnum = 1;
@@ -66,4 +67,22 @@ message SettingDatas{
 }
 message ClientSettingEnum{
   int32 item = 1;
+}
+message BackgroundPlayBackSettingRenderer{
+  Label name = 1;
+  bool backgroundPlayback = 2;
+  bool download = 3;
+  bytes trackingParams = 5;
+  bool downloadQualitySelection = 9;
+  bool smartDownload = 10;
+  Icon icon = 14;
+}
+message Label{
+  repeated Run runs = 1;
+}
+message Run{
+  string text = 1;
+}
+message Icon{
+  int32 iconType = 1;
 }

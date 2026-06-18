@@ -12,6 +12,7 @@ export const Setting = proto3.makeMessageType(
   "youtube.response.setting.Setting",
   () => [
     { no: 6, name: "settingItems", kind: "message", T: SettingItem, repeated: true },
+    { no: 7, name: "collectionItems", kind: "message", T: SettingItem, repeated: true },
     { no: 10, name: "trackingParams", kind: "message", T: TrackingParams },
   ],
 );
@@ -22,7 +23,7 @@ export const Setting = proto3.makeMessageType(
 export const SettingItem = proto3.makeMessageType(
   "youtube.response.setting.SettingItem",
   () => [
-    { no: 88478200, name: "settingCategoryEntryRenderer", kind: "message", T: SettingCategoryEntryRenderer },
+    { no: 88478200, name: "backgroundPlayBackSettingRenderer", kind: "message", T: BackgroundPlayBackSettingRenderer },
     { no: 66930374, name: "settingCategoryCollectionRenderer", kind: "message", T: SettingCategoryCollectionRenderer },
   ],
 );
@@ -125,7 +126,7 @@ export const ServiceEndpoint = proto3.makeMessageType(
 export const SetClientSettingEndpoint = proto3.makeMessageType(
   "youtube.response.setting.SetClientSettingEndpoint",
   () => [
-    { no: 1, name: "settingDatas", kind: "message", T: SettingDatas },
+    { no: 1, name: "settingData", kind: "message", T: SettingDatas },
   ],
 );
 
@@ -147,6 +148,52 @@ export const ClientSettingEnum = proto3.makeMessageType(
   "youtube.response.setting.ClientSettingEnum",
   () => [
     { no: 1, name: "item", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.setting.BackgroundPlayBackSettingRenderer
+ */
+export const BackgroundPlayBackSettingRenderer = proto3.makeMessageType(
+  "youtube.response.setting.BackgroundPlayBackSettingRenderer",
+  () => [
+    { no: 1, name: "name", kind: "message", T: Label },
+    { no: 2, name: "backgroundPlayback", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "download", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "trackingParams", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 9, name: "downloadQualitySelection", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "smartDownload", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 14, name: "icon", kind: "message", T: Icon },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.setting.Label
+ */
+export const Label = proto3.makeMessageType(
+  "youtube.response.setting.Label",
+  () => [
+    { no: 1, name: "runs", kind: "message", T: Run, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.setting.Run
+ */
+export const Run = proto3.makeMessageType(
+  "youtube.response.setting.Run",
+  () => [
+    { no: 1, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.setting.Icon
+ */
+export const Icon = proto3.makeMessageType(
+  "youtube.response.setting.Icon",
+  () => [
+    { no: 1, name: "iconType", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
