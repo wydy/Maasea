@@ -12,8 +12,8 @@ export const Browse = proto3.makeMessageType(
   "youtube.response.browse.Browse",
   () => [
     { no: 1, name: "responseContext", kind: "message", T: ResponseContext },
-    { no: 9, name: "contents", kind: "message", T: Contents },
-    { no: 10, name: "onResponseReceivedActions", kind: "message", T: Contents },
+    { no: 9, name: "content", kind: "message", T: Content },
+    { no: 10, name: "onResponseReceivedAction", kind: "message", T: Content },
   ],
 );
 
@@ -50,32 +50,32 @@ export const Params = proto3.makeMessageType(
 );
 
 /**
- * @generated from message youtube.response.browse.Contents
+ * @generated from message youtube.response.browse.Content
  */
-export const Contents = proto3.makeMessageType(
-  "youtube.response.browse.Contents",
+export const Content = proto3.makeMessageType(
+  "youtube.response.browse.Content",
   () => [
-    { no: 58173949, name: "browseResultsRenderer", kind: "message", T: BrowseResultsRenderer },
-    { no: 153515154, name: "videoWithContextRenderer", kind: "message", T: VideoWithContextRenderer },
-    { no: 49399797, name: "richGridRenderer", kind: "message", T: RichGridRenderer },
+    { no: 58173949, name: "singleColumnResultsRenderer", kind: "message", T: SingleColumnResultsRenderer },
+    { no: 153515154, name: "elementRenderer", kind: "message", T: ElementRenderer },
+    { no: 49399797, name: "sectionListRenderer", kind: "message", T: SectionListRenderer },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.BrowseResultsRenderer
+ * @generated from message youtube.response.browse.SingleColumnResultsRenderer
  */
-export const BrowseResultsRenderer = proto3.makeMessageType(
-  "youtube.response.browse.BrowseResultsRenderer",
+export const SingleColumnResultsRenderer = proto3.makeMessageType(
+  "youtube.response.browse.SingleColumnResultsRenderer",
   () => [
-    { no: 1, name: "tabs", kind: "message", T: Tab, repeated: true },
+    { no: 1, name: "tabs", kind: "message", T: BrowseTabSupportedRenderer, repeated: true },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.Tab
+ * @generated from message youtube.response.browse.BrowseTabSupportedRenderer
  */
-export const Tab = proto3.makeMessageType(
-  "youtube.response.browse.Tab",
+export const BrowseTabSupportedRenderer = proto3.makeMessageType(
+  "youtube.response.browse.BrowseTabSupportedRenderer",
   () => [
     { no: 58174010, name: "tabRenderer", kind: "message", T: TabRenderer },
   ],
@@ -87,39 +87,39 @@ export const Tab = proto3.makeMessageType(
 export const TabRenderer = proto3.makeMessageType(
   "youtube.response.browse.TabRenderer",
   () => [
-    { no: 4, name: "contents", kind: "message", T: Contents },
+    { no: 4, name: "content", kind: "message", T: Content },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.RichGridRenderer
+ * @generated from message youtube.response.browse.SectionListRenderer
  */
-export const RichGridRenderer = proto3.makeMessageType(
-  "youtube.response.browse.RichGridRenderer",
+export const SectionListRenderer = proto3.makeMessageType(
+  "youtube.response.browse.SectionListRenderer",
   () => [
-    { no: 1, name: "richGridContents", kind: "message", T: RichGridContent, repeated: true },
+    { no: 1, name: "sectionListSupportedRenderers", kind: "message", T: SectionListSupportedRenderer, repeated: true },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.RichGridContent
+ * @generated from message youtube.response.browse.SectionListSupportedRenderer
  */
-export const RichGridContent = proto3.makeMessageType(
-  "youtube.response.browse.RichGridContent",
+export const SectionListSupportedRenderer = proto3.makeMessageType(
+  "youtube.response.browse.SectionListSupportedRenderer",
   () => [
-    { no: 50195462, name: "richItemRenderer", kind: "message", T: RichItemRenderer },
-    { no: 51845067, name: "richSectionRenderer", kind: "message", T: RichSectionRenderer },
+    { no: 50195462, name: "itemSectionRenderer", kind: "message", T: ItemSectionRenderer },
+    { no: 51845067, name: "shelfRenderer", kind: "message", T: ShelfRenderer },
     { no: 221496734, name: "musicDescriptionShelfRenderer", kind: "message", T: MusicDescriptionShelfRenderer },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.RichItemRenderer
+ * @generated from message youtube.response.browse.ItemSectionRenderer
  */
-export const RichItemRenderer = proto3.makeMessageType(
-  "youtube.response.browse.RichItemRenderer",
+export const ItemSectionRenderer = proto3.makeMessageType(
+  "youtube.response.browse.ItemSectionRenderer",
   () => [
-    { no: 1, name: "richItemContent", kind: "message", T: RichItemContent, repeated: true },
+    { no: 1, name: "richItemContents", kind: "message", T: RichItemContent, repeated: true },
   ],
 );
 
@@ -129,15 +129,15 @@ export const RichItemRenderer = proto3.makeMessageType(
 export const RichItemContent = proto3.makeMessageType(
   "youtube.response.browse.RichItemContent",
   () => [
-    { no: 153515154, name: "videoWithContextRenderer", kind: "message", T: VideoWithContextRenderer },
+    { no: 153515154, name: "videoWithContextRenderer", kind: "message", T: ElementRenderer },
   ],
 );
 
 /**
- * @generated from message youtube.response.browse.VideoWithContextRenderer
+ * @generated from message youtube.response.browse.ElementRenderer
  */
-export const VideoWithContextRenderer = proto3.makeMessageType(
-  "youtube.response.browse.VideoWithContextRenderer",
+export const ElementRenderer = proto3.makeMessageType(
+  "youtube.response.browse.ElementRenderer",
   () => [
     { no: 172660663, name: "videoRendererContent", kind: "message", T: VideoRendererContent },
   ],
@@ -226,10 +226,10 @@ export const LayoutRender = proto3.makeMessageType(
 );
 
 /**
- * @generated from message youtube.response.browse.RichSectionRenderer
+ * @generated from message youtube.response.browse.ShelfRenderer
  */
-export const RichSectionRenderer = proto3.makeMessageType(
-  "youtube.response.browse.RichSectionRenderer",
+export const ShelfRenderer = proto3.makeMessageType(
+  "youtube.response.browse.ShelfRenderer",
   () => [
     { no: 5, name: "richSectionContent", kind: "message", T: RichSectionContent },
   ],
@@ -251,7 +251,7 @@ export const RichSectionContent = proto3.makeMessageType(
 export const ReelShelfRenderer = proto3.makeMessageType(
   "youtube.response.browse.ReelShelfRenderer",
   () => [
-    { no: 1, name: "richItemContent", kind: "message", T: RichItemContent, repeated: true },
+    { no: 1, name: "richItemContents", kind: "message", T: RichItemContent, repeated: true },
   ],
 );
 

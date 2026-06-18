@@ -3,12 +3,12 @@ package youtube.response.search;
 import "response/browse.proto";
 
 message Search{
-  youtube.response.browse.Contents contents = 4;
-  OnResponseReceivedCommands onResponseReceivedCommands = 7;
+  youtube.response.browse.Content content = 4;
+  OnResponseReceivedCommand onResponseReceivedCommand = 7;
 }
 
-message OnResponseReceivedCommands {
-  youtube.response.browse.RichItemRenderer richItemRenderer = 50195462;;
-  youtube.response.browse.RichGridRenderer appendContinuationItemsAction = 49399797;
+message OnResponseReceivedCommand {
+  youtube.response.browse.ItemSectionRenderer itemSectionRenderer = 50195462;
+  youtube.response.browse.SectionListRenderer appendContinuationItemsAction = 49399797;
 }
 

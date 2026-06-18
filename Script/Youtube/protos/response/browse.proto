@@ -3,8 +3,8 @@ package youtube.response.browse;
 
 message Browse{
   ResponseContext responseContext = 1;
-  Contents contents = 9;
-  Contents onResponseReceivedActions = 10;
+  Content content = 9;
+  Content onResponseReceivedAction = 10;
 }
 message ResponseContext{
   repeated ServiceTrackingParams serviceTrackingParams = 6;
@@ -18,37 +18,38 @@ message Params{
   string value = 2;
 }
 
-message Contents{
-  BrowseResultsRenderer browseResultsRenderer = 58173949;
-  VideoWithContextRenderer videoWithContextRenderer = 153515154;
-  RichGridRenderer richGridRenderer = 49399797;
+message Content{
+  SingleColumnResultsRenderer singleColumnResultsRenderer = 58173949;
+  ElementRenderer elementRenderer = 153515154;
+  SectionListRenderer sectionListRenderer = 49399797;
 }
 
-message BrowseResultsRenderer{
-  repeated Tab tabs = 1;
+message SingleColumnResultsRenderer{
+  repeated BrowseTabSupportedRenderer tabs = 1;
 }
-message Tab{
+message BrowseTabSupportedRenderer{
   TabRenderer tabRenderer = 58174010;
 }
 message TabRenderer{
-  Contents contents = 4;
-}
-message RichGridRenderer{
-  repeated RichGridContent richGridContents = 1;
-}
-message RichGridContent{
-  RichItemRenderer richItemRenderer = 50195462;
-  RichSectionRenderer richSectionRenderer = 51845067;
-  MusicDescriptionShelfRenderer musicDescriptionShelfRenderer = 221496734;
-}
-message RichItemRenderer{
-  repeated RichItemContent richItemContent = 1;
-}
-message RichItemContent{
-  VideoWithContextRenderer videoWithContextRenderer = 153515154;
+  Content content = 4;
 }
 
-message VideoWithContextRenderer{
+message SectionListRenderer{
+  repeated SectionListSupportedRenderer sectionListSupportedRenderers = 1;
+}
+message SectionListSupportedRenderer{
+  ItemSectionRenderer itemSectionRenderer = 50195462;
+  ShelfRenderer shelfRenderer = 51845067;
+  MusicDescriptionShelfRenderer musicDescriptionShelfRenderer = 221496734;
+}
+message ItemSectionRenderer{
+  repeated RichItemContent richItemContents = 1;
+}
+message RichItemContent{
+  ElementRenderer videoWithContextRenderer = 153515154;
+}
+
+message ElementRenderer{
   VideoRendererContent videoRendererContent = 172660663;
 }
 
@@ -79,14 +80,14 @@ message RenderInfo{
 message LayoutRender{
   string eml = 1;
 }
-message RichSectionRenderer{
+message ShelfRenderer{
   RichSectionContent richSectionContent = 5;
 }
 message RichSectionContent{
   ReelShelfRenderer reelShelfRenderer = 51431404;
 }
 message ReelShelfRenderer{
-  repeated RichItemContent richItemContent = 1;
+  repeated RichItemContent richItemContents = 1;
 }
 message MusicDescriptionShelfRenderer{
   Label description = 3;

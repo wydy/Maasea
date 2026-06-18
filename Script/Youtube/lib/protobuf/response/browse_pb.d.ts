@@ -16,14 +16,14 @@ export declare class Browse extends Message<Browse> {
   responseContext?: ResponseContext;
 
   /**
-   * @generated from field: youtube.response.browse.Contents contents = 9;
+   * @generated from field: youtube.response.browse.Content content = 9;
    */
-  contents?: Contents;
+  content?: Content;
 
   /**
-   * @generated from field: youtube.response.browse.Contents onResponseReceivedActions = 10;
+   * @generated from field: youtube.response.browse.Content onResponseReceivedAction = 10;
    */
-  onResponseReceivedActions?: Contents;
+  onResponseReceivedAction?: Content;
 
   constructor(data?: PartialMessage<Browse>);
 
@@ -123,85 +123,85 @@ export declare class Params extends Message<Params> {
 }
 
 /**
- * @generated from message youtube.response.browse.Contents
+ * @generated from message youtube.response.browse.Content
  */
-export declare class Contents extends Message<Contents> {
+export declare class Content extends Message<Content> {
   /**
-   * @generated from field: youtube.response.browse.BrowseResultsRenderer browseResultsRenderer = 58173949;
+   * @generated from field: youtube.response.browse.SingleColumnResultsRenderer singleColumnResultsRenderer = 58173949;
    */
-  browseResultsRenderer?: BrowseResultsRenderer;
+  singleColumnResultsRenderer?: SingleColumnResultsRenderer;
 
   /**
-   * @generated from field: youtube.response.browse.VideoWithContextRenderer videoWithContextRenderer = 153515154;
+   * @generated from field: youtube.response.browse.ElementRenderer elementRenderer = 153515154;
    */
-  videoWithContextRenderer?: VideoWithContextRenderer;
+  elementRenderer?: ElementRenderer;
 
   /**
-   * @generated from field: youtube.response.browse.RichGridRenderer richGridRenderer = 49399797;
+   * @generated from field: youtube.response.browse.SectionListRenderer sectionListRenderer = 49399797;
    */
-  richGridRenderer?: RichGridRenderer;
+  sectionListRenderer?: SectionListRenderer;
 
-  constructor(data?: PartialMessage<Contents>);
+  constructor(data?: PartialMessage<Content>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.Contents";
+  static readonly typeName = "youtube.response.browse.Content";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Contents;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Contents;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Content;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Contents;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Content;
 
-  static equals(a: Contents | PlainMessage<Contents> | undefined, b: Contents | PlainMessage<Contents> | undefined): boolean;
+  static equals(a: Content | PlainMessage<Content> | undefined, b: Content | PlainMessage<Content> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.browse.BrowseResultsRenderer
+ * @generated from message youtube.response.browse.SingleColumnResultsRenderer
  */
-export declare class BrowseResultsRenderer extends Message<BrowseResultsRenderer> {
+export declare class SingleColumnResultsRenderer extends Message<SingleColumnResultsRenderer> {
   /**
-   * @generated from field: repeated youtube.response.browse.Tab tabs = 1;
+   * @generated from field: repeated youtube.response.browse.BrowseTabSupportedRenderer tabs = 1;
    */
-  tabs: Tab[];
+  tabs: BrowseTabSupportedRenderer[];
 
-  constructor(data?: PartialMessage<BrowseResultsRenderer>);
+  constructor(data?: PartialMessage<SingleColumnResultsRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.BrowseResultsRenderer";
+  static readonly typeName = "youtube.response.browse.SingleColumnResultsRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BrowseResultsRenderer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SingleColumnResultsRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BrowseResultsRenderer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SingleColumnResultsRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BrowseResultsRenderer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SingleColumnResultsRenderer;
 
-  static equals(a: BrowseResultsRenderer | PlainMessage<BrowseResultsRenderer> | undefined, b: BrowseResultsRenderer | PlainMessage<BrowseResultsRenderer> | undefined): boolean;
+  static equals(a: SingleColumnResultsRenderer | PlainMessage<SingleColumnResultsRenderer> | undefined, b: SingleColumnResultsRenderer | PlainMessage<SingleColumnResultsRenderer> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.browse.Tab
+ * @generated from message youtube.response.browse.BrowseTabSupportedRenderer
  */
-export declare class Tab extends Message<Tab> {
+export declare class BrowseTabSupportedRenderer extends Message<BrowseTabSupportedRenderer> {
   /**
    * @generated from field: youtube.response.browse.TabRenderer tabRenderer = 58174010;
    */
   tabRenderer?: TabRenderer;
 
-  constructor(data?: PartialMessage<Tab>);
+  constructor(data?: PartialMessage<BrowseTabSupportedRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.Tab";
+  static readonly typeName = "youtube.response.browse.BrowseTabSupportedRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Tab;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BrowseTabSupportedRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Tab;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BrowseTabSupportedRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tab;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BrowseTabSupportedRenderer;
 
-  static equals(a: Tab | PlainMessage<Tab> | undefined, b: Tab | PlainMessage<Tab> | undefined): boolean;
+  static equals(a: BrowseTabSupportedRenderer | PlainMessage<BrowseTabSupportedRenderer> | undefined, b: BrowseTabSupportedRenderer | PlainMessage<BrowseTabSupportedRenderer> | undefined): boolean;
 }
 
 /**
@@ -209,9 +209,9 @@ export declare class Tab extends Message<Tab> {
  */
 export declare class TabRenderer extends Message<TabRenderer> {
   /**
-   * @generated from field: youtube.response.browse.Contents contents = 4;
+   * @generated from field: youtube.response.browse.Content content = 4;
    */
-  contents?: Contents;
+  content?: Content;
 
   constructor(data?: PartialMessage<TabRenderer>);
 
@@ -229,85 +229,85 @@ export declare class TabRenderer extends Message<TabRenderer> {
 }
 
 /**
- * @generated from message youtube.response.browse.RichGridRenderer
+ * @generated from message youtube.response.browse.SectionListRenderer
  */
-export declare class RichGridRenderer extends Message<RichGridRenderer> {
+export declare class SectionListRenderer extends Message<SectionListRenderer> {
   /**
-   * @generated from field: repeated youtube.response.browse.RichGridContent richGridContents = 1;
+   * @generated from field: repeated youtube.response.browse.SectionListSupportedRenderer sectionListSupportedRenderers = 1;
    */
-  richGridContents: RichGridContent[];
+  sectionListSupportedRenderers: SectionListSupportedRenderer[];
 
-  constructor(data?: PartialMessage<RichGridRenderer>);
+  constructor(data?: PartialMessage<SectionListRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.RichGridRenderer";
+  static readonly typeName = "youtube.response.browse.SectionListRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RichGridRenderer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SectionListRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RichGridRenderer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SectionListRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RichGridRenderer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SectionListRenderer;
 
-  static equals(a: RichGridRenderer | PlainMessage<RichGridRenderer> | undefined, b: RichGridRenderer | PlainMessage<RichGridRenderer> | undefined): boolean;
+  static equals(a: SectionListRenderer | PlainMessage<SectionListRenderer> | undefined, b: SectionListRenderer | PlainMessage<SectionListRenderer> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.browse.RichGridContent
+ * @generated from message youtube.response.browse.SectionListSupportedRenderer
  */
-export declare class RichGridContent extends Message<RichGridContent> {
+export declare class SectionListSupportedRenderer extends Message<SectionListSupportedRenderer> {
   /**
-   * @generated from field: youtube.response.browse.RichItemRenderer richItemRenderer = 50195462;
+   * @generated from field: youtube.response.browse.ItemSectionRenderer itemSectionRenderer = 50195462;
    */
-  richItemRenderer?: RichItemRenderer;
+  itemSectionRenderer?: ItemSectionRenderer;
 
   /**
-   * @generated from field: youtube.response.browse.RichSectionRenderer richSectionRenderer = 51845067;
+   * @generated from field: youtube.response.browse.ShelfRenderer shelfRenderer = 51845067;
    */
-  richSectionRenderer?: RichSectionRenderer;
+  shelfRenderer?: ShelfRenderer;
 
   /**
    * @generated from field: youtube.response.browse.MusicDescriptionShelfRenderer musicDescriptionShelfRenderer = 221496734;
    */
   musicDescriptionShelfRenderer?: MusicDescriptionShelfRenderer;
 
-  constructor(data?: PartialMessage<RichGridContent>);
+  constructor(data?: PartialMessage<SectionListSupportedRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.RichGridContent";
+  static readonly typeName = "youtube.response.browse.SectionListSupportedRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RichGridContent;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SectionListSupportedRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RichGridContent;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SectionListSupportedRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RichGridContent;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SectionListSupportedRenderer;
 
-  static equals(a: RichGridContent | PlainMessage<RichGridContent> | undefined, b: RichGridContent | PlainMessage<RichGridContent> | undefined): boolean;
+  static equals(a: SectionListSupportedRenderer | PlainMessage<SectionListSupportedRenderer> | undefined, b: SectionListSupportedRenderer | PlainMessage<SectionListSupportedRenderer> | undefined): boolean;
 }
 
 /**
- * @generated from message youtube.response.browse.RichItemRenderer
+ * @generated from message youtube.response.browse.ItemSectionRenderer
  */
-export declare class RichItemRenderer extends Message<RichItemRenderer> {
+export declare class ItemSectionRenderer extends Message<ItemSectionRenderer> {
   /**
-   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContent = 1;
+   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContents = 1;
    */
-  richItemContent: RichItemContent[];
+  richItemContents: RichItemContent[];
 
-  constructor(data?: PartialMessage<RichItemRenderer>);
+  constructor(data?: PartialMessage<ItemSectionRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.RichItemRenderer";
+  static readonly typeName = "youtube.response.browse.ItemSectionRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RichItemRenderer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ItemSectionRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RichItemRenderer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ItemSectionRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RichItemRenderer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ItemSectionRenderer;
 
-  static equals(a: RichItemRenderer | PlainMessage<RichItemRenderer> | undefined, b: RichItemRenderer | PlainMessage<RichItemRenderer> | undefined): boolean;
+  static equals(a: ItemSectionRenderer | PlainMessage<ItemSectionRenderer> | undefined, b: ItemSectionRenderer | PlainMessage<ItemSectionRenderer> | undefined): boolean;
 }
 
 /**
@@ -315,9 +315,9 @@ export declare class RichItemRenderer extends Message<RichItemRenderer> {
  */
 export declare class RichItemContent extends Message<RichItemContent> {
   /**
-   * @generated from field: youtube.response.browse.VideoWithContextRenderer videoWithContextRenderer = 153515154;
+   * @generated from field: youtube.response.browse.ElementRenderer videoWithContextRenderer = 153515154;
    */
-  videoWithContextRenderer?: VideoWithContextRenderer;
+  videoWithContextRenderer?: ElementRenderer;
 
   constructor(data?: PartialMessage<RichItemContent>);
 
@@ -335,27 +335,27 @@ export declare class RichItemContent extends Message<RichItemContent> {
 }
 
 /**
- * @generated from message youtube.response.browse.VideoWithContextRenderer
+ * @generated from message youtube.response.browse.ElementRenderer
  */
-export declare class VideoWithContextRenderer extends Message<VideoWithContextRenderer> {
+export declare class ElementRenderer extends Message<ElementRenderer> {
   /**
    * @generated from field: youtube.response.browse.VideoRendererContent videoRendererContent = 172660663;
    */
   videoRendererContent?: VideoRendererContent;
 
-  constructor(data?: PartialMessage<VideoWithContextRenderer>);
+  constructor(data?: PartialMessage<ElementRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.VideoWithContextRenderer";
+  static readonly typeName = "youtube.response.browse.ElementRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VideoWithContextRenderer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ElementRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VideoWithContextRenderer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ElementRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VideoWithContextRenderer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ElementRenderer;
 
-  static equals(a: VideoWithContextRenderer | PlainMessage<VideoWithContextRenderer> | undefined, b: VideoWithContextRenderer | PlainMessage<VideoWithContextRenderer> | undefined): boolean;
+  static equals(a: ElementRenderer | PlainMessage<ElementRenderer> | undefined, b: ElementRenderer | PlainMessage<ElementRenderer> | undefined): boolean;
 }
 
 /**
@@ -561,27 +561,27 @@ export declare class LayoutRender extends Message<LayoutRender> {
 }
 
 /**
- * @generated from message youtube.response.browse.RichSectionRenderer
+ * @generated from message youtube.response.browse.ShelfRenderer
  */
-export declare class RichSectionRenderer extends Message<RichSectionRenderer> {
+export declare class ShelfRenderer extends Message<ShelfRenderer> {
   /**
    * @generated from field: youtube.response.browse.RichSectionContent richSectionContent = 5;
    */
   richSectionContent?: RichSectionContent;
 
-  constructor(data?: PartialMessage<RichSectionRenderer>);
+  constructor(data?: PartialMessage<ShelfRenderer>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.browse.RichSectionRenderer";
+  static readonly typeName = "youtube.response.browse.ShelfRenderer";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RichSectionRenderer;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ShelfRenderer;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RichSectionRenderer;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ShelfRenderer;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RichSectionRenderer;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ShelfRenderer;
 
-  static equals(a: RichSectionRenderer | PlainMessage<RichSectionRenderer> | undefined, b: RichSectionRenderer | PlainMessage<RichSectionRenderer> | undefined): boolean;
+  static equals(a: ShelfRenderer | PlainMessage<ShelfRenderer> | undefined, b: ShelfRenderer | PlainMessage<ShelfRenderer> | undefined): boolean;
 }
 
 /**
@@ -613,9 +613,9 @@ export declare class RichSectionContent extends Message<RichSectionContent> {
  */
 export declare class ReelShelfRenderer extends Message<ReelShelfRenderer> {
   /**
-   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContent = 1;
+   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContents = 1;
    */
-  richItemContent: RichItemContent[];
+  richItemContents: RichItemContent[];
 
   constructor(data?: PartialMessage<ReelShelfRenderer>);
 

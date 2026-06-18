@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3 } from "@bufbuild/protobuf";
-import { Contents as Contents$1 } from "./browse_pb.js";
+import { Content as Content$1 } from "./browse_pb.js";
 
 /**
  * @generated from message youtube.response.next.Next
@@ -12,18 +12,18 @@ import { Contents as Contents$1 } from "./browse_pb.js";
 export const Next = proto3.makeMessageType(
   "youtube.response.next.Next",
   () => [
-    { no: 7, name: "Contents", kind: "message", T: Contents },
-    { no: 8, name: "onResponseReceivedActions", kind: "message", T: Contents$1 },
+    { no: 7, name: "content", kind: "message", T: Content },
+    { no: 8, name: "onResponseReceivedAction", kind: "message", T: Content$1 },
   ],
 );
 
 /**
- * @generated from message youtube.response.next.Contents
+ * @generated from message youtube.response.next.Content
  */
-export const Contents = proto3.makeMessageType(
-  "youtube.response.next.Contents",
+export const Content = proto3.makeMessageType(
+  "youtube.response.next.Content",
   () => [
-    { no: 51779735, name: "NextResults", kind: "message", T: NextResults },
+    { no: 51779735, name: "nextResults", kind: "message", T: NextResults },
   ],
 );
 
@@ -33,7 +33,7 @@ export const Contents = proto3.makeMessageType(
 export const NextResults = proto3.makeMessageType(
   "youtube.response.next.NextResults",
   () => [
-    { no: 1, name: "Contents", kind: "message", T: Contents$1 },
+    { no: 1, name: "content", kind: "message", T: Content$1 },
   ],
 );
 

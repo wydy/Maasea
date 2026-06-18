@@ -5,21 +5,21 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { Contents as Contents$1 } from "./browse_pb.js";
+import type { Content as Content$1 } from "./browse_pb.js";
 
 /**
  * @generated from message youtube.response.next.Next
  */
 export declare class Next extends Message<Next> {
   /**
-   * @generated from field: youtube.response.next.Contents Contents = 7;
+   * @generated from field: youtube.response.next.Content content = 7;
    */
-  Contents?: Contents;
+  content?: Content;
 
   /**
-   * @generated from field: youtube.response.browse.Contents onResponseReceivedActions = 8;
+   * @generated from field: youtube.response.browse.Content onResponseReceivedAction = 8;
    */
-  onResponseReceivedActions?: Contents$1;
+  onResponseReceivedAction?: Content$1;
 
   constructor(data?: PartialMessage<Next>);
 
@@ -37,27 +37,27 @@ export declare class Next extends Message<Next> {
 }
 
 /**
- * @generated from message youtube.response.next.Contents
+ * @generated from message youtube.response.next.Content
  */
-export declare class Contents extends Message<Contents> {
+export declare class Content extends Message<Content> {
   /**
-   * @generated from field: youtube.response.next.NextResults NextResults = 51779735;
+   * @generated from field: youtube.response.next.NextResults nextResults = 51779735;
    */
-  NextResults?: NextResults;
+  nextResults?: NextResults;
 
-  constructor(data?: PartialMessage<Contents>);
+  constructor(data?: PartialMessage<Content>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "youtube.response.next.Contents";
+  static readonly typeName = "youtube.response.next.Content";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Contents;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Contents;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Content;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Contents;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Content;
 
-  static equals(a: Contents | PlainMessage<Contents> | undefined, b: Contents | PlainMessage<Contents> | undefined): boolean;
+  static equals(a: Content | PlainMessage<Content> | undefined, b: Content | PlainMessage<Content> | undefined): boolean;
 }
 
 /**
@@ -65,9 +65,9 @@ export declare class Contents extends Message<Contents> {
  */
 export declare class NextResults extends Message<NextResults> {
   /**
-   * @generated from field: youtube.response.browse.Contents Contents = 1;
+   * @generated from field: youtube.response.browse.Content content = 1;
    */
-  Contents?: Contents$1;
+  content?: Content$1;
 
   constructor(data?: PartialMessage<NextResults>);
 
