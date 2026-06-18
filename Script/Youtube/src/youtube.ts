@@ -6,7 +6,7 @@ export abstract class YouTubeMessage {
   needProcess: boolean
   needSave: boolean
   message: any
-  version = '1.0'
+  version = '1.1'
   whiteNo: number[]
   blackNo: number[]
   whiteEml: string[]
@@ -40,7 +40,7 @@ export abstract class YouTubeMessage {
       blockUpload: true,
       blockImmersive: true,
       blockShorts: false,
-      blockAdSignals: false,
+      blockAdSignals: true,
       debug: false
     }
     return typeof $argument === 'string' && !$argument.includes('{{{')

@@ -23,17 +23,17 @@ const handleResponse = (response: CFetchResponse): void => {
       console.log(e.toString())
     }
   } else {
-    $.msg('YouTubeAds', '脚本需要更新', '外部资源 -> 全部更新')
     $.exit()
   }
 }
+
 export const checkSurgeVersion = (): void => {
   const build = parseInt($environment?.['surge-build'])
   if (isNaN(build) || build < 2700) {
     $.msg(
       'YouTubeAds Beta',
-      '不支持该 Surge 版本',
-      '点击通知可跳转旧版脚本',
+      'Unsupported Surge version',
+      'Tap to install the legacy module',
       'https://raw.githubusercontent.com/Maasea/sgmodule/master/YoutubeAds.sgmodule'
     )
     $.exit()

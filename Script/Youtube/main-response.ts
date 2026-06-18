@@ -6,7 +6,6 @@ async function start (): Promise<void> {
     const responseMsg = createMessage($.request.url)
 
     if (!responseMsg) {
-      $.msg('YouTube Enhance', '脚本需要更新', '外部资源 -> 全部更新')
       $.exit()
       return
     }
