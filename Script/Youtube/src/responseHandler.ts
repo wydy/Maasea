@@ -102,7 +102,21 @@ export class NextMessage extends BrowseMessage {
 
   async pure (): Promise<this> {
     this.removeKnownAdFields(this.message, [14])
+    this.removeAdContainers()
     return await super.pure()
+  }
+
+  removeAdContainers (): void {
+    if (this.checkMessageIsAd(this.message.adSlot)) {
+      delete this.message.adSlot
+      this.needProcess = true
+    }
+
+    const sections = this.message.watchNextContainer?.wrapper?.payload?.renderer?.result?.sections
+    if (this.checkMessageIsAd(sections?.adContainer)) {
+      delete sections.adContainer
+      this.needProcess = true
+    }
   }
 }
 

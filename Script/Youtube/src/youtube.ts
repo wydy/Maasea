@@ -211,6 +211,10 @@ export abstract class YouTubeMessage {
   checkBufferIsAd (field): boolean {
     if (!field || field.data.length < 1000) return false
     const data = field.data as Uint8Array
+    return this.checkBytesIncludePagead(data)
+  }
+
+  checkBytesIncludePagead (data: Uint8Array): boolean {
     const pagead = [112, 97, 103, 101, 97, 100]
     const last = data.length - pagead.length
     for (let i = 0; i <= last; i++) {
@@ -226,6 +230,10 @@ export abstract class YouTubeMessage {
       }
     }
     return false
+  }
+
+  checkMessageIsAd (msg: Message<any> | undefined): boolean {
+    return msg ? this.checkBytesIncludePagead(msg.toBinary()) : false
   }
 
   checkUnknownFiled (field): boolean {
