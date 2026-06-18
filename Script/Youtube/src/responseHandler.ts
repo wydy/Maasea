@@ -5,7 +5,7 @@ import { Next } from '../lib/protobuf/response/next_pb'
 import { Search } from '../lib/protobuf/response/search_pb'
 import { Shorts } from '../lib/protobuf/response/shorts_pb'
 import { Guide } from '../lib/protobuf/response/guide_pb'
-import { Setting, SubSetting, SettingItem } from '../lib/protobuf/response/setting_pb'
+import { Setting, SettingItem } from '../lib/protobuf/response/setting_pb'
 
 import { YouTubeMessage } from './youtube'
 import { $ } from '../lib/env'
@@ -176,34 +176,6 @@ export class SettingMessage extends YouTubeMessage {
   }
 
   pure (): this {
-    this.iterate(this.message.settingItems, 'categoryId', (obj) => {
-      if (obj.categoryId === 10135) {
-        const fakePIPSetting = new SubSetting({
-          settingBooleanRenderer: {
-            itemId: 0,
-            enableServiceEndpoint: {
-              setClientSettingEndpoint: {
-                settingData: {
-                  clientSettingEnum: { item: 151 },
-                  boolValue: true
-                }
-              }
-            },
-            disableServiceEndpoint: {
-              setClientSettingEndpoint: {
-                settingData: {
-                  clientSettingEnum: { item: 151 },
-                  boolValue: false
-                }
-              }
-            }
-          }
-        })
-        obj.subSettings.push(fakePIPSetting)
-      }
-      return false
-    })
-
     const fakePlayBackgroundSetting = new SettingItem({
       backgroundPlayBackSettingRenderer: {
         backgroundPlayback: true,
