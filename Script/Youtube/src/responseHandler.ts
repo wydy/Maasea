@@ -99,6 +99,11 @@ export class NextMessage extends BrowseMessage {
   constructor (msgType: any = Next, name: string = 'Next') {
     super(msgType, name)
   }
+
+  async pure (): Promise<this> {
+    this.removeKnownAdFields(this.message, [14])
+    return await super.pure()
+  }
 }
 
 export class SearchMessage extends BrowseMessage {

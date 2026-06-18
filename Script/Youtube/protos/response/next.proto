@@ -5,6 +5,8 @@ import "response/browse.proto";
 message Next{
   Content content = 7;
   youtube.response.browse.Content onResponseReceivedAction = 8;
+  NextAdSlot adSlot = 15;
+  WatchNextContainer watchNextContainer = 42;
 }
 message Content{
   NextResults nextResults = 51779735;
@@ -12,4 +14,47 @@ message Content{
 
 message NextResults{
   youtube.response.browse.Content content = 1;
+}
+
+message NextAdSlot{
+  NextAdSlotRenderer renderer = 361588638;
+}
+
+message NextAdSlotRenderer{
+  repeated youtube.response.browse.RichItemContent richItemContents = 2;
+}
+
+message WatchNextContainer{
+  WatchNextWrapper wrapper = 357104971;
+}
+
+message WatchNextWrapper{
+  WatchNextPayload payload = 2;
+}
+
+message WatchNextPayload{
+  WatchNextRenderer renderer = 361256913;
+}
+
+message WatchNextRenderer{
+  WatchNextResult result = 1;
+}
+
+message WatchNextResult{
+  WatchNextSections sections = 138681066;
+}
+
+message WatchNextSections{
+  WatchNextItemContainer itemContainer = 2;
+  youtube.response.browse.Content content = 3;
+  WatchNextItemContainer adContainer = 10;
+}
+
+message WatchNextItemContainer{
+  WatchNextRichItem richItem = 194605894;
+  WatchNextRichItem immersiveItem = 260791572;
+}
+
+message WatchNextRichItem{
+  repeated youtube.response.browse.RichItemContent richItemContents = 1;
 }

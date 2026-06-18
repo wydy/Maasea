@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { Content as Content$1 } from "./browse_pb.js";
+import type { Content as Content$1, RichItemContent } from "./browse_pb.js";
 
 /**
  * @generated from message youtube.response.next.Next
@@ -20,6 +20,16 @@ export declare class Next extends Message<Next> {
    * @generated from field: youtube.response.browse.Content onResponseReceivedAction = 8;
    */
   onResponseReceivedAction?: Content$1;
+
+  /**
+   * @generated from field: youtube.response.next.NextAdSlot adSlot = 15;
+   */
+  adSlot?: NextAdSlot;
+
+  /**
+   * @generated from field: youtube.response.next.WatchNextContainer watchNextContainer = 42;
+   */
+  watchNextContainer?: WatchNextContainer;
 
   constructor(data?: PartialMessage<Next>);
 
@@ -82,5 +92,260 @@ export declare class NextResults extends Message<NextResults> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NextResults;
 
   static equals(a: NextResults | PlainMessage<NextResults> | undefined, b: NextResults | PlainMessage<NextResults> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.NextAdSlot
+ */
+export declare class NextAdSlot extends Message<NextAdSlot> {
+  /**
+   * @generated from field: youtube.response.next.NextAdSlotRenderer renderer = 361588638;
+   */
+  renderer?: NextAdSlotRenderer;
+
+  constructor(data?: PartialMessage<NextAdSlot>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.NextAdSlot";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NextAdSlot;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NextAdSlot;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NextAdSlot;
+
+  static equals(a: NextAdSlot | PlainMessage<NextAdSlot> | undefined, b: NextAdSlot | PlainMessage<NextAdSlot> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.NextAdSlotRenderer
+ */
+export declare class NextAdSlotRenderer extends Message<NextAdSlotRenderer> {
+  /**
+   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContents = 2;
+   */
+  richItemContents: RichItemContent[];
+
+  constructor(data?: PartialMessage<NextAdSlotRenderer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.NextAdSlotRenderer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NextAdSlotRenderer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NextAdSlotRenderer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NextAdSlotRenderer;
+
+  static equals(a: NextAdSlotRenderer | PlainMessage<NextAdSlotRenderer> | undefined, b: NextAdSlotRenderer | PlainMessage<NextAdSlotRenderer> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextContainer
+ */
+export declare class WatchNextContainer extends Message<WatchNextContainer> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextWrapper wrapper = 357104971;
+   */
+  wrapper?: WatchNextWrapper;
+
+  constructor(data?: PartialMessage<WatchNextContainer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextContainer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextContainer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextContainer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextContainer;
+
+  static equals(a: WatchNextContainer | PlainMessage<WatchNextContainer> | undefined, b: WatchNextContainer | PlainMessage<WatchNextContainer> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextWrapper
+ */
+export declare class WatchNextWrapper extends Message<WatchNextWrapper> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextPayload payload = 2;
+   */
+  payload?: WatchNextPayload;
+
+  constructor(data?: PartialMessage<WatchNextWrapper>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextWrapper";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextWrapper;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextWrapper;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextWrapper;
+
+  static equals(a: WatchNextWrapper | PlainMessage<WatchNextWrapper> | undefined, b: WatchNextWrapper | PlainMessage<WatchNextWrapper> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextPayload
+ */
+export declare class WatchNextPayload extends Message<WatchNextPayload> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextRenderer renderer = 361256913;
+   */
+  renderer?: WatchNextRenderer;
+
+  constructor(data?: PartialMessage<WatchNextPayload>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextPayload";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextPayload;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextPayload;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextPayload;
+
+  static equals(a: WatchNextPayload | PlainMessage<WatchNextPayload> | undefined, b: WatchNextPayload | PlainMessage<WatchNextPayload> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextRenderer
+ */
+export declare class WatchNextRenderer extends Message<WatchNextRenderer> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextResult result = 1;
+   */
+  result?: WatchNextResult;
+
+  constructor(data?: PartialMessage<WatchNextRenderer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextRenderer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextRenderer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextRenderer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextRenderer;
+
+  static equals(a: WatchNextRenderer | PlainMessage<WatchNextRenderer> | undefined, b: WatchNextRenderer | PlainMessage<WatchNextRenderer> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextResult
+ */
+export declare class WatchNextResult extends Message<WatchNextResult> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextSections sections = 138681066;
+   */
+  sections?: WatchNextSections;
+
+  constructor(data?: PartialMessage<WatchNextResult>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextResult";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextResult;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextResult;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextResult;
+
+  static equals(a: WatchNextResult | PlainMessage<WatchNextResult> | undefined, b: WatchNextResult | PlainMessage<WatchNextResult> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextSections
+ */
+export declare class WatchNextSections extends Message<WatchNextSections> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextItemContainer itemContainer = 2;
+   */
+  itemContainer?: WatchNextItemContainer;
+
+  /**
+   * @generated from field: youtube.response.browse.Content content = 3;
+   */
+  content?: Content$1;
+
+  /**
+   * @generated from field: youtube.response.next.WatchNextItemContainer adContainer = 10;
+   */
+  adContainer?: WatchNextItemContainer;
+
+  constructor(data?: PartialMessage<WatchNextSections>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextSections";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextSections;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextSections;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextSections;
+
+  static equals(a: WatchNextSections | PlainMessage<WatchNextSections> | undefined, b: WatchNextSections | PlainMessage<WatchNextSections> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextItemContainer
+ */
+export declare class WatchNextItemContainer extends Message<WatchNextItemContainer> {
+  /**
+   * @generated from field: youtube.response.next.WatchNextRichItem richItem = 194605894;
+   */
+  richItem?: WatchNextRichItem;
+
+  /**
+   * @generated from field: youtube.response.next.WatchNextRichItem immersiveItem = 260791572;
+   */
+  immersiveItem?: WatchNextRichItem;
+
+  constructor(data?: PartialMessage<WatchNextItemContainer>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextItemContainer";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextItemContainer;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextItemContainer;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextItemContainer;
+
+  static equals(a: WatchNextItemContainer | PlainMessage<WatchNextItemContainer> | undefined, b: WatchNextItemContainer | PlainMessage<WatchNextItemContainer> | undefined): boolean;
+}
+
+/**
+ * @generated from message youtube.response.next.WatchNextRichItem
+ */
+export declare class WatchNextRichItem extends Message<WatchNextRichItem> {
+  /**
+   * @generated from field: repeated youtube.response.browse.RichItemContent richItemContents = 1;
+   */
+  richItemContents: RichItemContent[];
+
+  constructor(data?: PartialMessage<WatchNextRichItem>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "youtube.response.next.WatchNextRichItem";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchNextRichItem;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchNextRichItem;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchNextRichItem;
+
+  static equals(a: WatchNextRichItem | PlainMessage<WatchNextRichItem> | undefined, b: WatchNextRichItem | PlainMessage<WatchNextRichItem> | undefined): boolean;
 }
 

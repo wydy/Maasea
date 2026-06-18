@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3 } from "@bufbuild/protobuf";
-import { Content as Content$1 } from "./browse_pb.js";
+import { Content as Content$1, RichItemContent } from "./browse_pb.js";
 
 /**
  * @generated from message youtube.response.next.Next
@@ -14,6 +14,8 @@ export const Next = proto3.makeMessageType(
   () => [
     { no: 7, name: "content", kind: "message", T: Content },
     { no: 8, name: "onResponseReceivedAction", kind: "message", T: Content$1 },
+    { no: 15, name: "adSlot", kind: "message", T: NextAdSlot },
+    { no: 42, name: "watchNextContainer", kind: "message", T: WatchNextContainer },
   ],
 );
 
@@ -34,6 +36,109 @@ export const NextResults = proto3.makeMessageType(
   "youtube.response.next.NextResults",
   () => [
     { no: 1, name: "content", kind: "message", T: Content$1 },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.NextAdSlot
+ */
+export const NextAdSlot = proto3.makeMessageType(
+  "youtube.response.next.NextAdSlot",
+  () => [
+    { no: 361588638, name: "renderer", kind: "message", T: NextAdSlotRenderer },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.NextAdSlotRenderer
+ */
+export const NextAdSlotRenderer = proto3.makeMessageType(
+  "youtube.response.next.NextAdSlotRenderer",
+  () => [
+    { no: 2, name: "richItemContents", kind: "message", T: RichItemContent, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextContainer
+ */
+export const WatchNextContainer = proto3.makeMessageType(
+  "youtube.response.next.WatchNextContainer",
+  () => [
+    { no: 357104971, name: "wrapper", kind: "message", T: WatchNextWrapper },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextWrapper
+ */
+export const WatchNextWrapper = proto3.makeMessageType(
+  "youtube.response.next.WatchNextWrapper",
+  () => [
+    { no: 2, name: "payload", kind: "message", T: WatchNextPayload },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextPayload
+ */
+export const WatchNextPayload = proto3.makeMessageType(
+  "youtube.response.next.WatchNextPayload",
+  () => [
+    { no: 361256913, name: "renderer", kind: "message", T: WatchNextRenderer },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextRenderer
+ */
+export const WatchNextRenderer = proto3.makeMessageType(
+  "youtube.response.next.WatchNextRenderer",
+  () => [
+    { no: 1, name: "result", kind: "message", T: WatchNextResult },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextResult
+ */
+export const WatchNextResult = proto3.makeMessageType(
+  "youtube.response.next.WatchNextResult",
+  () => [
+    { no: 138681066, name: "sections", kind: "message", T: WatchNextSections },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextSections
+ */
+export const WatchNextSections = proto3.makeMessageType(
+  "youtube.response.next.WatchNextSections",
+  () => [
+    { no: 2, name: "itemContainer", kind: "message", T: WatchNextItemContainer },
+    { no: 3, name: "content", kind: "message", T: Content$1 },
+    { no: 10, name: "adContainer", kind: "message", T: WatchNextItemContainer },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextItemContainer
+ */
+export const WatchNextItemContainer = proto3.makeMessageType(
+  "youtube.response.next.WatchNextItemContainer",
+  () => [
+    { no: 194605894, name: "richItem", kind: "message", T: WatchNextRichItem },
+    { no: 260791572, name: "immersiveItem", kind: "message", T: WatchNextRichItem },
+  ],
+);
+
+/**
+ * @generated from message youtube.response.next.WatchNextRichItem
+ */
+export const WatchNextRichItem = proto3.makeMessageType(
+  "youtube.response.next.WatchNextRichItem",
+  () => [
+    { no: 1, name: "richItemContents", kind: "message", T: RichItemContent, repeated: true },
   ],
 );
 

@@ -75,6 +75,23 @@ export abstract class YouTubeMessage {
     return []
   }
 
+  removeKnownAdFields (msg: any, fieldNos: number[]): void {
+    if (!(msg instanceof Message)) return
+    const fields = this.listUnknownFields(msg)
+    if (!fields.length) return
+
+    const keptFields = fields.filter((field) => {
+      return !fieldNos.includes(field.no) || !this.checkBufferIsAd(field)
+    })
+    if (keptFields.length === fields.length) return
+
+    msg.getType().runtime.bin.discardUnknownFields(msg)
+    keptFields.forEach((field) => {
+      msg.getType().runtime.bin.onUnknownField(msg, field.no, field.wireType, field.data)
+    })
+    this.needProcess = true
+  }
+
   save (): void {
     if (this.needSave) {
       $.log('Update Config')
