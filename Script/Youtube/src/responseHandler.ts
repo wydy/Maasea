@@ -31,25 +31,6 @@ export class BrowseMessage extends YouTubeMessage {
     return this
   }
 
-  removeCommonAD (obj: any, index: number): void {
-    const content = obj.richGridContents[index]
-    const richItemContent = content?.richItemRenderer?.richItemContent
-    for (let j = richItemContent?.length - 1; j >= 0; j--) {
-      if (this.isAdvertise(richItemContent[j])) {
-        richItemContent.splice(j, 1)
-        this.needProcess = true
-      }
-    }
-  }
-
-  removeShorts (obj: any, index: number): void {
-    const richSectionRenderer = obj.richGridContents[index]?.richSectionRenderer
-    if (this.isShorts(richSectionRenderer)) {
-      obj.richGridContents.splice(index, 1)
-      this.needProcess = true
-    }
-  }
-
   getBrowseId (): string {
     let browseId = ''
     this.iterate(this.message?.responseContext, 'key', (obj, stack) => {
@@ -117,33 +98,6 @@ export class BrowseMessage extends YouTubeMessage {
 export class NextMessage extends BrowseMessage {
   constructor (msgType: any = Next, name: string = 'Next') {
     super(msgType, name)
-  }
-
-  addTranslateTab (): void {
-    this.iterate(this.message?.a1F7?.musicPlayRender, 'items', (obj, stack) => {
-      const item = obj.items.find((item) =>
-        item.tab.info?.browseInfo?.browseId.startsWith('MPLYt')
-      )
-      if (item) item.tab.name = item.tab.name + '⇄'
-      this.needProcess = true
-      // if (item) {
-      //   const name = item.tab.name
-      //   const translateTab = {
-      //     tab: {
-      //       name: name === 'Lyrics' ? 'Lyrics(ZH)' : '歌词(中文)',
-      //       info: {
-      //         browseInfo: {
-      //           browseId: 'translate$' + item.tab.info.browseInfo.browseId
-      //         }
-      //       }
-      //     }
-      //   }
-      //
-      //   obj.items.splice(2, 0, translateTab)
-      //   this.needProcess = true
-      // }
-      stack.length = 0
-    })
   }
 }
 

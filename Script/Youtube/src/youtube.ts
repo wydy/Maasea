@@ -40,6 +40,7 @@ export abstract class YouTubeMessage {
       blockUpload: true,
       blockImmersive: true,
       blockShorts: false,
+      blockAdSignals: false,
       debug: false
     }
     return typeof $argument === 'string' && !$argument.includes('{{{')

@@ -7,8 +7,10 @@ export default class RequestMessage extends YouTubeMessage {
   }
 
   pure (): this {
-    this.message.context.adSignalsInfo.params.length = 0
-    this.needProcess = true
+    if (this.argument.blockAdSignals && this.message.context?.adSignalsInfo?.params?.length) {
+      this.message.context.adSignalsInfo.params.length = 0
+      this.needProcess = true
+    }
     return this
   }
 }

@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node test/test.ts",
+    "analyze:har": "node tools/analyze-har.mjs",
     "build": "node build.mjs",
     "build:proto": "npx buf generate protos"
   },
